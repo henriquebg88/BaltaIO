@@ -13,3 +13,4 @@ C:\Users\henri\OneDrive\Documentos\Balta\PaymentContext\Domain\bin\Debug\net8.0\
 C:\Users\henri\OneDrive\Documentos\Balta\PaymentContext\Domain\bin\Debug\net8.0\Shared.pdb
 C:\Users\henri\OneDrive\Documentos\Balta\PaymentContext\Domain\obj\Debug\net8.0\Domain.csproj.AssemblyReference.cache
 C:\Users\henri\OneDrive\Documentos\Balta\PaymentContext\Domain\obj\Debug\net8.0\Domain.csproj.Up2Date
+C:\Users\henri\OneDrive\Documentos\Balta\PaymentContext\Domain\obj\Debug\net8.0\Domain.sourcelink.json

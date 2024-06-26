@@ -1,35 +1,47 @@
+using Flunt.Validations;
+using PaymentContext.Domain.ValueObjects;
+using PaymentContext.Shared.Entites;
+
 namespace PaymentContext.Domain.Entities
 {
-    public class Student
+    public class Student : Entity
     {
         private IList<Subscription> _subscriptions;
-        public Student(string firstName, string lastName, string document, string email)
+        public Student(Name name, Document document, Email email)
         {
-            FirstName = firstName;
-            LastName = lastName;
+            Name = name;
             Document = document;
             Email = email;
             _subscriptions = new List<Subscription>();
         }
 
-        public string FirstName { get; private set; }
-        public string LastName { get; private set; }
-        public string Document { get; private set; }
-        public string Email { get; private set; }
+        public Name Name { get; private set; }
+        public Document Document { get; private set; }
+        public Email Email { get; private set; }
 
         // Evitar que use diretamente metodos por fora da classe como .add do List, 
         // não passando pela regra de negocio
         public IReadOnlyCollection<Subscription> Subscriptions { get => _subscriptions.ToArray(); }
-        public string Address { get; private set; }
+        public Address Address { get; private set; }
         
         public void AddSubscription(Subscription subscription){
-            /// Cancelar todas as assinaturas existentes e manter a nova como ativa
+            
+            var hasActiveSubscripton = false;
+
             foreach (var sub in Subscriptions)
-            {
-                sub.Inactivate();
-            }
+                if(sub.Active) hasActiveSubscripton = true;
+
+            AddNotifications(new Contract()
+                .Requires()
+                .IsFalse(hasActiveSubscripton, "Student.Subscription", "Ja possui inscrição ativa")
+                .IsGreaterThan(subscription.Payments.Count, 0, "Student.Subscription.Payments", "Náo possui pagamento" )    
+            );
 
             _subscriptions.Add(subscription);
+
+            // if(hasActiveSubscripton)
+            //     AddNotification("Student.Subscriptions", "Voce já possui uma inscrição ativa.");
+            
         }
     }
 }

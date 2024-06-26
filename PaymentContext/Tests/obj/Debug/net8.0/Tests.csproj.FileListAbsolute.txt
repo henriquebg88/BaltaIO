@@ -114,3 +114,5 @@ C:\Users\henri\OneDrive\Documentos\Balta\PaymentContext\Tests\bin\Debug\net8.0\D
 C:\Users\henri\OneDrive\Documentos\Balta\PaymentContext\Tests\bin\Debug\net8.0\Shared.dll
 C:\Users\henri\OneDrive\Documentos\Balta\PaymentContext\Tests\bin\Debug\net8.0\Shared.pdb
 C:\Users\henri\OneDrive\Documentos\Balta\PaymentContext\Tests\bin\Debug\net8.0\Domain.pdb
+C:\Users\henri\OneDrive\Documentos\Balta\PaymentContext\Tests\obj\Debug\net8.0\Tests.sourcelink.json
+C:\Users\henri\OneDrive\Documentos\Balta\PaymentContext\Tests\bin\Debug\net8.0\Flunt.dll

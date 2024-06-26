@@ -1,8 +1,14 @@
+using System.Reflection.Metadata;
+using Flunt.Validations;
+using PaymentContext.Domain.ValueObjects;
+using PaymentContext.Shared.Entites;
+using Document = PaymentContext.Domain.ValueObjects.Document;
+
 namespace PaymentContext.Domain.Entities
 {
-    public abstract class Payment
+    public abstract class Payment : Entity
     {
-        protected Payment(DateTime paidDate, DateTime expireDate, decimal total, decimal totalPaid, string address, string document, string owner, string email)
+        protected Payment(DateTime paidDate, DateTime expireDate, decimal total, decimal totalPaid, Address address, Document document, string owner, Email email)
         {
             Number = Guid.NewGuid().ToString().Replace("-","").Substring(0, 10).ToUpper();
             PaidDate = paidDate;
@@ -13,6 +19,13 @@ namespace PaymentContext.Domain.Entities
             Document = document;
             Owner = owner;
             Email = email;
+
+            AddNotifications(
+                new Contract()
+                .Requires()
+                .IsGreaterThan(Total, 0, "Payment.Total", "O total não pode ser zero.")
+                .IsGreaterOrEqualsThan(Total, TotalPaid, "Payment.TotalPaid", "O valor pago é menor que o valor do pagamento.")
+            );
         }
 
         public string Number { get; private set; }
@@ -20,9 +33,9 @@ namespace PaymentContext.Domain.Entities
         public DateTime ExpireDate { get; private set; }
         public decimal Total { get; private set; }
         public decimal TotalPaid { get; private set; }
-        public string Address { get; private set; }
-        public string Document { get; private set; }
+        public Address Address { get; private set; }
+        public Document Document { get; private set; }
         public string Owner { get; private set; }
-        public string Email { get; private set; }
+        public Email Email { get; private set; }
     }
 }
